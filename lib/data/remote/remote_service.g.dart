@@ -9,6 +9,7 @@ part of 'remote_service.dart';
 class _RemoteService implements RemoteService {
   _RemoteService(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
+    baseUrl ??= 'http://www.omdbapi.com';
   }
 
   final Dio _dio;
@@ -16,9 +17,11 @@ class _RemoteService implements RemoteService {
   String baseUrl;
 
   @override
-  Future<MoviesResponse> getMovies() async {
+  Future<MoviesResponse> getMovies(apiKey, query) async {
+    ArgumentError.checkNotNull(apiKey, 'apiKey');
+    ArgumentError.checkNotNull(query, 'query');
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'apikey': apiKey, r't': query};
     final _data = <String, dynamic>{};
     final _result = await _dio.request<Map<String, dynamic>>('/',
         queryParameters: queryParameters,

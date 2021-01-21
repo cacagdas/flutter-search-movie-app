@@ -1,14 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'movie.g.dart';
-
 @JsonSerializable()
-class Movie {
-  int movieId;
-  String movieName;
+class Movie with ChangeNotifier{
+  String title;
+  String poster;
+  bool isFavorite;
 
-  Movie({this.movieId, this.movieName});
+  Movie({this.title, this.poster, this.isFavorite = false});
 
-  factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
-  Map<String, dynamic> toJson() => _$MovieToJson(this);
+  factory Movie.fromJson(Map<String, dynamic> json) {
+    return Movie(
+        title: json["Title"],
+        poster: json["Poster"]
+    );
+  }
+
+  void setFavorite() {
+    isFavorite = !isFavorite;
+    notifyListeners();
+  }
 }

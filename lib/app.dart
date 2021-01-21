@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:search_movie_app/data/model/movie.dart';
 import 'package:search_movie_app/ui/pages/home/home.page.dart';
 import 'package:search_movie_app/values/theme.dart';
 
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiProvider(
     providers: [
+      ChangeNotifierProvider(create: (context) => Movie()),
     ],
     child: MaterialApp(
           debugShowCheckedModeBanner: false,
