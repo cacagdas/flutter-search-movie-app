@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart' hide Headers;
 import 'package:retrofit/retrofit.dart';
-import 'package:search_movie_app/data/model/movie.dart';
 import 'package:search_movie_app/data/remote/responsemodels/movies.response.dart';
 
 import 'constants/endpoints.dart';
@@ -14,7 +13,7 @@ abstract class RemoteService {
   @GET(Endpoints.getMovies)
   Future<MoviesResponse> getMovies(
       @Query("apikey") String apiKey,
-      @Query("t") String query,
+      @Query("s") String query,
       );
 
 }

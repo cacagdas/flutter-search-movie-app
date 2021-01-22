@@ -16,29 +16,32 @@ class _MovieListItemState extends State<MovieListItem> {
   Widget build(BuildContext context) {
     final movie = Provider.of<Movie>(context, listen: false);
     
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: GridTile(
-        child: FadeInImage(
-          placeholder: AssetImage('asset/images/movie-placeholder.png'),
-          image: NetworkImage(widget.movie.poster),
-          fit: BoxFit.cover,
-        ),
-        footer: GridTileBar(
-          backgroundColor: Colors.black87,
-          leading: Consumer<Movie>(
-            builder: (context, movie, child) => IconButton(
-              icon: Icon(
-                  movie.isFavorite ? Icons.favorite : Icons.favorite_border),
-              color: Theme.of(context).accentColor,
-              onPressed: () {
-                movie.setFavorite();
-              },
-            ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: GridTile(
+          child: FadeInImage(
+            placeholder: AssetImage('asset/movie-placeholder.png'),
+            image: NetworkImage(widget.movie.poster),
+            fit: BoxFit.cover,
           ),
-          title: Text(
-            widget.movie.title,
-            textAlign: TextAlign.center,
+          footer: GridTileBar(
+            backgroundColor: Colors.black87,
+            leading: Consumer<Movie>(
+              builder: (context, movie, child) => IconButton(
+                icon: Icon(
+                    movie.isFavorite ? Icons.favorite : Icons.favorite_border),
+                color: Theme.of(context).accentColor,
+                onPressed: () {
+                  movie.setFavorite();
+                },
+              ),
+            ),
+            title: Text(
+              widget.movie.title,
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),

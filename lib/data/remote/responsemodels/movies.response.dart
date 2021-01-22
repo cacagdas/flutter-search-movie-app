@@ -5,9 +5,9 @@ part 'movies.response.g.dart';
 
 @JsonSerializable()
 class MoviesResponse {
-  List<Movie> search;
+  List<Movie> Search;
 
-  MoviesResponse({ this.search });
+  MoviesResponse({ this.Search });
 
   factory MoviesResponse.fromJson(Map<String, dynamic> json) => _$MoviesResponseFromJson(json);
   Map<String, dynamic> toJson() => _$MoviesResponseToJson(this);

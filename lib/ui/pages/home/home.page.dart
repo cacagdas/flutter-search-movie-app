@@ -9,6 +9,10 @@ import 'package:search_movie_app/ui/widgets/movie_list_item.dart';
 import 'package:search_movie_app/values/colors.dart' as colors;
 
 class HomePage extends StatefulWidget {
+
+  final String query;
+  HomePage({this.query});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -26,7 +30,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _sendGetMoviesRequest() async {
-    await _remoteService.getMovies('API_KEY', 'home').catchError((error) {
+    setState(() { _isLoading = true; });
+
+    await _remoteService.getMovies('1e8bf6a5', widget.query).catchError((error) {
       if ((error as DioError).type != DioErrorType.CANCEL &&
           !(error as DioError).message.contains("SocketException")) {
         showDialog(
@@ -38,9 +44,9 @@ class _HomePageState extends State<HomePage> {
                 ));
       }
     }).then((value) {
-      movies = value.search;
+      movies = value.Search;
     });
-    setState(() {});
+    setState(() { _isLoading = false; });
   }
 
   @override
@@ -59,14 +65,25 @@ class _HomePageState extends State<HomePage> {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
             child: (movies == null)
-                ? Center(child: CircularProgressIndicator())
+                ? LayoutBuilder(
+              builder: (ctx, constraints) {
+                return Column(
+                  children: <Widget>[
+                    Text(
+                      'Search movies!',
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                  ],
+                );
+              },
+            )
                 : movies.isEmpty
                     ? LayoutBuilder(
                         builder: (ctx, constraints) {
                           return Column(
                             children: <Widget>[
                               Text(
-                                'No movies!',
+                                'No results!',
                                 style: Theme.of(context).textTheme.title,
                               ),
                             ],

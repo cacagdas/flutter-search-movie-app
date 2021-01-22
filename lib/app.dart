@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:search_movie_app/data/model/movie.dart';
 import 'package:search_movie_app/ui/pages/home/home.page.dart';
+import 'package:search_movie_app/ui/pages/search/search.page.dart';
 import 'package:search_movie_app/values/theme.dart';
 
 class App extends StatelessWidget {
@@ -21,7 +22,7 @@ class App extends StatelessWidget {
     child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: _isDarkModeEnabled() ? darkTheme : appTheme,
-          home: HomePage(),
+          home: SearchPage(),
         ),
   );
 }

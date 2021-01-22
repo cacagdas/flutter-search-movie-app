@@ -21,7 +21,7 @@ class _RemoteService implements RemoteService {
     ArgumentError.checkNotNull(apiKey, 'apiKey');
     ArgumentError.checkNotNull(query, 'query');
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'apikey': apiKey, r't': query};
+    final queryParameters = <String, dynamic>{r'apikey': apiKey, r's': query};
     final _data = <String, dynamic>{};
     final _result = await _dio.request<Map<String, dynamic>>('/',
         queryParameters: queryParameters,
