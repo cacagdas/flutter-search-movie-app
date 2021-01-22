@@ -65,18 +65,7 @@ class _HomePageState extends State<HomePage> {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
             child: (movies == null)
-                ? LayoutBuilder(
-              builder: (ctx, constraints) {
-                return Column(
-                  children: <Widget>[
-                    Text(
-                      'Search movies!',
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                  ],
-                );
-              },
-            )
+                ? CircularProgressIndicator()
                 : movies.isEmpty
                     ? LayoutBuilder(
                         builder: (ctx, constraints) {
